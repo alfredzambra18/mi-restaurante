@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú Digital - Restaurante</title>
+
+        <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- ENCABEZADO -->
+    <header class="encabezado">
+        <div class="encabezado-contenido">
+            <div class="logo" id="logoRestaurante">🍽️</div>
+            <h1 id="nombreRestaurante">Cargando...</h1>
+            <p id="direccionRestaurante"></p>
+        </div>
+        <div class="tasa-dolar" id="tasaDolarDisplay">
+            💵 Tasa BCV: <span id="tasaValor">0.00</span> Bs
+        </div>
+    </header>
+
+        <!-- BUSCADOR -->
+    <div class="contenedor-buscador">
+        <input type="text" 
+               id="buscarPlato" 
+               placeholder="🔍 ¿Qué se te antoja hoy?" 
+               class="buscador">
+    </div>
+
+    <!-- BOTONES DE CATEGORÍAS -->
+    <div class="contenedor-categorias" id="botonesCategorias">
+        <!-- Aquí se crearán los botones automáticamente -->
+    </div>
+
+        <!-- AQUÍ APARECEN LOS PLATOS -->
+    <div class="menu-grid" id="contenedorMenu">
+        <div class="cargando">🍳 Preparando el menú...</div>
+    </div>
+
+        <!-- BOTÓN DEL CARRITO -->
+    <div class="carrito-flotante" id="botonCarrito" onclick="mostrarCarrito()">
+        <span class="icono-carrito">🛒</span>
+        <span class="contador-carrito" id="contadorCarrito">0</span>
+    </div>
+
+        <!-- PANEL DEL CARRITO -->
+    <div class="panel-carrito" id="panelCarrito">
+        <div class="carrito-encabezado">
+            <h2>🛒 Tu Pedido</h2>
+            <button class="cerrar-carrito" onclick="ocultarCarrito()">✕</button>
+        </div>
+        <div class="items-carrito" id="itemsCarrito">
+            <p class="carrito-vacio">Tu carrito está vacío</p>
+        </div>
+        <div class="carrito-pie" id="carritoPie" style="display: none;">
+            <div class="total-carrito">
+                <span>Total USD:</span>
+                <strong id="totalDolares">$0.00</strong>
+            </div>
+            <div class="total-bolivares">
+                <span>Total Bs:</span>
+                <strong id="totalBolivares">Bs 0.00</strong>
+            </div>
+            <button class="boton-whatsapp" onclick="prepararPedidoWhatsApp()">
+                📱 Pedir por WhatsApp
+            </button>
+        </div>
+    </div>
+
+        <!-- VENTANA PARA COMPLETAR PEDIDO -->
+    <div class="modal" id="modalWhatsApp">
+        <div class="modal-contenido">
+            <h3>📝 Completa tu pedido</h3>
+            
+            <div class="grupo-formulario">
+                <label>¿En qué mesa estás?</label>
+                <input type="text" id="mesaCliente" placeholder="Ej: Mesa 5">
+            </div>
+            
+            <div class="grupo-formulario">
+                <label>Tu nombre (opcional):</label>
+                <input type="text" id="nombreCliente" placeholder="¿Cómo te llamas?">
+            </div>
+            
+            <div class="grupo-formulario">
+                <label>¿Alguna nota especial?</label>
+                <textarea id="notasCliente" placeholder="Ej: Sin cebolla, la carne bien cocida..."></textarea>
+            </div>
+            
+            <div class="resumen-pedido" id="resumenPedido"></div>
+            
+            <div class="botones-modal">
+                <button class="boton-whatsapp" onclick="enviarWhatsApp()">
+                    ✅ Enviar Pedido
+                </button>
+                <button class="boton-cancelar" onclick="cerrarModal()">
+                    Cancelar
+                </button>
+            </div>
+        </div>
+    </div>
+
+        <!-- PIE DE PÁGINA -->
+    <footer class="pie-pagina">
+        <p id="infoPie"></p>
+    </footer>
+
+    <!-- AQUÍ VA LA MAGIA (JavaScript) -->
+    <script src="script.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔐 Panel Admin - Restaurante</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: #f0f2f5;
+        }
+        
+        .contenedor-admin {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+        
+        .login-contenedor {
+            max-width: 450px;
+            margin: 100px auto;
+            background: white;
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .login-icono {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+        
+        .login-titulo {
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+            font-size: 1.8rem;
+        }
+        
+        .login-subtitulo {
+            color: #7f8c8d;
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+        }
+        
+        .input-contraseña {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            letter-spacing: 5px;
+            transition: border-color 0.3s;
+        }
+        
+        .input-contraseña:focus {
+            border-color: #e74c3c;
+            outline: none;
+        }
+        
+        .boton-login {
+            width: 100%;
+            padding: 1rem;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 1.5rem;
+            font-family: 'Poppins', sans-serif;
+            transition: background 0.3s, transform 0.3s;
+        }
+        
+        .boton-login:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+        }
+        
+        .error-login {
+            color: #e74c3c;
+            margin-top: 1rem;
+            display: none;
+            font-size: 0.9rem;
+        }
+        
+        .pista-contraseña {
+            color: #95a5a6;
+            font-size: 0.8rem;
+            margin-top: 1.5rem;
+        }
+        
+        .panel-principal {
+            display: none;
+        }
+        
+        .admin-encabezado {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            padding: 1.5rem 2rem;
+            border-radius: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+        
+        .admin-titulo {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .admin-subtitulo {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .boton-cerrar-sesion {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            transition: background 0.3s;
+        }
+        
+        .boton-cerrar-sesion:hover {
+            background: #c0392b;
+        }
+        
+        .seccion-admin {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 20px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        .seccion-titulo {
+            color: #2c3e50;
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #e74c3c;
+            display: inline-block;
+        }
+        
+        .mensaje-exito {
+            background: #d4edda;
+            color: #155724;
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            display: none;
+            animation: desvanecer 3s forwards;
+            font-weight: 500;
+        }
+        
+        @keyframes desvanecer {
+            0% { opacity: 1; }
+            70% { opacity: 1; }
+            100% { opacity: 0; display: none; }
+        }
+        
+        .fila-formulario {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .grupo-campo {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .grupo-campo label {
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            color: #2c3e50;
+            font-size: 0.9rem;
+        }
+        
+        .grupo-campo input,
+        .grupo-campo select,
+        .grupo-campo textarea {
+            padding: 0.7rem 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-family: 'Poppins', sans-serif;
+            transition: border-color 0.3s;
+        }
+        
+        .grupo-campo input:focus,
+        .grupo-campo select:focus,
+        .grupo-campo textarea:focus {
+            border-color: #e74c3c;
+            outline: none;
+        }
+        
+        .grupo-campo textarea {
+            resize: vertical;
+            min-height: 60px;
+        }
+        
+        .checkbox-contenedor {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 0.5rem 0;
+        }
+        
+        .checkbox-contenedor input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+        
+        .checkbox-contenedor label {
+            cursor: pointer;
+            font-weight: 500;
+        }
+        
+        .boton-guardar {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            transition: background 0.3s;
+        }
+        
+        .boton-guardar:hover {
+            background: #229954;
+        }
+        
+        .boton-agregar {
+            background: #2980b9;
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            transition: background 0.3s;
+        }
+        
+        .boton-agregar:hover {
+            background: #2471a3;
+        }
+        
+        .boton-eliminar {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: 500;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.85rem;
+            transition: background 0.3s;
+        }
+        
+        .boton-eliminar:hover {
+            background: #c0392b;
+        }
+        
+        .tabla-platos {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        
+        .tabla-platos th {
+            background: #f8f9fa;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 0.9rem;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        
+        .tabla-platos td {
+            padding: 0.8rem 1rem;
+            border-bottom: 1px solid #ecf0f1;
+            font-size: 0.9rem;
+        }
+        
+        .tabla-platos tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .estado-disponible {
+            color: #27ae60;
+            font-weight: 600;
+        }
+        
+        .estado-agotado {
+            color: #e74c3c;
+            font-weight: 600;
+        }
+        
+        .badge-destacado {
+            background: #f39c12;
+            color: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        @media (max-width: 768px) {
+            .tabla-platos {
+                font-size: 0.8rem;
+            }
+            
+            .tabla-platos th,
+            .tabla-platos td {
+                padding: 0.5rem;
+            }
+            
+            .admin-encabezado {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+            
+            .fila-formulario {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="contenedor-admin">
+        
+        <!-- PANTALLA DE LOGIN -->
+        <div class="login-contenedor" id="loginPantalla">
+            <div class="login-icono">👨‍🍳</div>
+            <h1 class="login-titulo">Panel del Dueño</h1>
+            <p class="login-subtitulo">Ingresa la contraseña para administrar tu restaurante</p>
+            
+            <input type="password" 
+                   id="passwordInput" 
+                   class="input-contraseña" 
+                   placeholder="••••••"
+                   maxlength="20">
+            
+            <button class="boton-login" onclick="iniciarSesion()">
+                🔓 Ingresar al Panel
+            </button>
+            
+            <p class="error-login" id="errorLogin">❌ Contraseña incorrecta</p>
+            <p class="pista-contraseña">💡 Contraseña por defecto: <strong>admin123</strong></p>
+        </div>
+        
+        <!-- PANEL PRINCIPAL -->
+        <div class="panel-principal" id="panelPrincipal">
+            
+            <div class="mensaje-exito" id="mensajeExito">✅ Cambios guardados exitosamente</div>
+            
+            <div class="admin-encabezado">
+                <div>
+                    <div class="admin-titulo">👨‍🍳 Panel de Administración</div>
+                    <div class="admin-subtitulo" id="nombreRestAdmin">Restaurante</div>
+                </div>
+                <button class="boton-cerrar-sesion" onclick="cerrarSesion()">🚪 Cerrar Sesión</button>
+            </div>
+            
+            <!-- SECCIÓN 1: Datos del Restaurante -->
+            <div class="seccion-admin">
+                <h3 class="seccion-titulo">🏪 Datos del Restaurante</h3>
+                <div class="fila-formulario">
+                    <div class="grupo-campo">
+                        <label>Nombre del Restaurante:</label>
+                        <input type="text" id="editNombre" placeholder="Ej: Restaurante El Buen Sabor">
+                    </div>
+                    <div class="grupo-campo">
+                        <label>Emoji/Logo:</label>
+                        <input type="text" id="editLogo" placeholder="Ej: 🍽️" maxlength="5">
+                    </div>
+                </div>
+                <div class="fila-formulario">
+                    <div class="grupo-campo">
+                        <label>WhatsApp (con código 58):</label>
+                        <input type="text" id="editWhatsApp" placeholder="584120000000">
+                    </div>
+                    <div class="grupo-campo">
+                        <label>Dirección:</label>
+                        <input type="text" id="editDireccion" placeholder="Av. Principal, Local 5">
+                    </div>
+                </div>
+                <div class="fila-formulario">
+                    <div class="grupo-campo">
+                        <label>Horario:</label>
+                        <input type="text" id="editHorario" placeholder="Lun-Sáb: 11am-9pm">
+                    </div>
+                    <div class="grupo-campo">
+                        <label>Mensaje de bienvenida:</label>
+                        <input type="text" id="editMensaje" placeholder="¡Bienvenidos!">
+                    </div>
+                </div>
+                <button class="boton-guardar" onclick="guardarDatosRestaurante()">💾 Guardar Datos</button>
+            </div>
+            
+            <!-- SECCIÓN 2: Tasa del Dólar -->
+            <div class="seccion-admin">
+                <h3 class="seccion-titulo">💵 Tasa del Dólar BCV</h3>
+                <div class="fila-formulario">
+                    <div class="grupo-campo">
+                        <label>Tasa actual (Bolívares por Dólar):</label>
+                        <input type="number" id="editTasa" step="0.01" placeholder="35.50">
+                    </div>
+                    <div class="grupo-campo" style="justify-content: flex-end;">
+                        <button class="boton-guardar" onclick="actualizarTasa()">💱 Actualizar Tasa</button>
+                    </div>
+                </div>
+                <p style="color: #7f8c8d; font-size: 0.85rem; margin-top: 0.5rem;">
+                    📌 Esta tasa se usará para calcular los precios en bolívares en todo el menú
+                </p>
+            </div>
+            
+            <!-- SECCIÓN 3: Cambiar Contraseña (NUEVA) -->
+            <div class="seccion-admin">
+                <h3 class="seccion-titulo">🔐 Cambiar Contraseña</h3>
+                <div class="fila-formulario">
+                    <div class="grupo-campo">
+                        <label>Contraseña actual:</label>
+                        <input type="password" id="passwordActual" placeholder="••••••">
+                    </div>
+                    <div class="grupo-campo">
+                        <label>Nueva contraseña:</label>
+                        <input type="password" id="passwordNueva" placeholder="Mínimo 6 caracteres">
+                    </div>
+                    <div class="grupo-campo">
+                        <label>Confirmar nueva contraseña:</label>
+                        <input type="password" id="passwordConfirmar" placeholder="Repite la nueva contraseña">
+                    </div>
+                    <div class="grupo-campo" style="justify-content: flex-end;">
+                        <button class="boton-guardar" onclick="cambiarPassword()">🔒 Cambiar Contraseña</button>
+                    </div>
+                </div>
+                <p style="color: #7f8c8d; font-size: 0.85rem; margin-top: 0.5rem;">
+                    📌 Guarda bien tu nueva contraseña. Si la olvidas, tendrás que editar el archivo data.json
+                </p>
+            </div>
+            
+            <!-- SECCIÓN 4: Agregar Nuevo Plato -->
+            <div class="seccion-admin">
+                <h3 class="seccion-titulo">➕ Agregar Nuevo Plato</h3>
+                <div class="fila-formulario">
+                    <div class="grupo-campo">
+                        <label>Nombre del Plato:</label>
+                        <input type="text" id="nuevoNombre" placeholder="Ej: Parrilla Mixta">
+                    </div>
+                    <div class="grupo-campo">
+                        <label>Categoría:</label>
+                        <select id="nuevoCategoria">
+                            <option value="">Seleccionar categoría...</option>
+                        </select>
+                    </div>
+                    <div class="grupo-campo">
+                        <label>Precio en Dólares ($):</label>
+                        <input type="number" id="nuevoPrecio" step="0.01" placeholder="15.99">
+                    </div>
+                </div>
+                <div class="fila-formulario">
+                    <div class="grupo-campo">
+                        <label>Descripción:</label>
+                        <textarea id="nuevoDescripcion" placeholder="Describe los ingredientes..."></textarea>
+                    </div>
+                    <div class="grupo-campo">
+                        <label>URL de la Foto:</label>
+                        <input type="text" id="nuevoFoto" placeholder="https://imagen.com/foto.jpg">
+                        <small style="color: #7f8c8d; margin-top: 0.2rem;">
+                            💡 Puedes subir fotos a <a href="https://imgur.com" target="_blank">imgur.com</a> (gratis)
+                        </small>
+                    </div>
+                </div>
+                <div class="checkbox-contenedor">
+                    <input type="checkbox" id="nuevoDisponible" checked>
+                    <label>✅ Disponible para venta</label>
+                </div>
+                <div class="checkbox-contenedor">
+                    <input type="checkbox" id="nuevoDestacado">
+                    <label>⭐ Marcar como "Más Vendido"</label>
+                </div>
+                <button class="boton-agregar" onclick="agregarNuevoPlato()">➕ Agregar Plato al Menú</button>
+            </div>
+            
+            <!-- SECCIÓN 5: Lista de Platos Actuales -->
+            <div class="seccion-admin">
+                <h3 class="seccion-titulo">📋 Platos en el Menú</h3>
+                <div style="overflow-x: auto;">
+                    <table class="tabla-platos" id="tablaPlatos">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Nombre</th>
+                                <th>Categoría</th>
+                                <th>Precio $</th>
+                                <th>Estado</th>
+                                <th>Destacado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cuerpoTabla">
+                            <tr>
+                                <td colspan="7" style="text-align: center;">Cargando platos...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>

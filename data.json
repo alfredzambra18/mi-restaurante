@@ -1,0 +1,70 @@
+{
+  "password": "admin123",
+  "informacion_restaurante": {
+    "nombre": "Restaurante El Buen Sabor",
+    "logo_emoji": "🍽️",
+    "whatsapp": "584120000000",
+    "direccion": "Av. Principal, Centro Comercial Las Flores, Local 5",
+    "horario": "Lunes a Sábado: 11:00 AM - 9:00 PM",
+    "mensaje_bienvenida": "¡Bienvenidos! Escanea el QR para ver nuestro menú"
+  },
+  "tasa_dolar_bcv": 35.50,
+  "categorias": [
+    "Entradas",
+    "Platos Principales",
+    "Bebidas",
+    "Postres"
+  ],
+  "menu": [
+    {
+      "numero": 1,
+      "nombre": "Tequeños con Salsa Tártara",
+      "categoria": "Entradas",
+      "descripcion": "6 tequeños de queso blanco con salsa tártara casera",
+      "precio_dolares": 5.99,
+      "foto": "https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?w=400",
+      "disponible": true,
+      "mas_vendido": true
+    },
+    {
+      "numero": 2,
+      "nombre": "Hamburguesa con Papas",
+      "categoria": "Platos Principales",
+      "descripcion": "Carne angus 200gr, queso, lechuga, tomate y papas fritas",
+      "precio_dolares": 12.99,
+      "foto": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400",
+      "disponible": true,
+      "mas_vendido": true
+    },
+    {
+      "numero": 3,
+      "nombre": "Pizza Margarita",
+      "categoria": "Platos Principales",
+      "descripcion": "Mozzarella fresca, albahaca y salsa de tomate casera",
+      "precio_dolares": 15.99,
+      "foto": "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=400",
+      "disponible": true,
+      "mas_vendido": false
+    },
+    {
+      "numero": 4,
+      "nombre": "Limonada con Hierbabuena",
+      "categoria": "Bebidas",
+      "descripcion": "Limonada natural con hojas de hierbabuena fresca",
+      "precio_dolares": 3.50,
+      "foto": "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
+      "disponible": true,
+      "mas_vendido": false
+    },
+    {
+      "numero": 5,
+      "nombre": "Torta Tres Leches",
+      "categoria": "Postres",
+      "descripcion": "Torta casera de tres leches con merengue",
+      "precio_dolares": 6.99,
+      "foto": "https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=400",
+      "disponible": true,
+      "mas_vendido": true
+    }
+  ]
+}

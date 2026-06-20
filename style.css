@@ -1,0 +1,603 @@
+/* ==========================================
+   ESTILOS GENERALES
+   ========================================== */
+
+/* Quitamos márgenes y padding por defecto */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Fondo de la página con gradiente */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    min-height: 100vh;
+    padding-bottom: 100px;
+}
+
+/* ==========================================
+   ENCABEZADO
+   ========================================== */
+.encabezado {
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+    color: white;
+    padding: 2rem 1rem;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 4rem;
+    margin-bottom: 0.5rem;
+    animation: rebote 2s infinite;
+}
+
+/* Animación del logo */
+@keyframes rebote {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.encabezado h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.tasa-dolar {
+    background: rgba(255,255,255,0.2);
+    padding: 0.5rem 1.5rem;
+    border-radius: 20px;
+    display: inline-block;
+    margin-top: 0.8rem;
+    font-weight: 600;
+    backdrop-filter: blur(5px);
+    font-size: 0.9rem;
+}
+
+/* ==========================================
+   BUSCADOR
+   ========================================== */
+.contenedor-buscador {
+    max-width: 600px;
+    margin: 1.5rem auto;
+    padding: 0 1rem;
+}
+
+.buscador {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    font-family: 'Poppins', sans-serif;
+    outline: none;
+    transition: box-shadow 0.3s;
+}
+
+.buscador:focus {
+    box-shadow: 0 8px 25px rgba(231, 76, 60, 0.3);
+}
+
+/* ==========================================
+   CATEGORÍAS
+   ========================================== */
+.contenedor-categorias {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0 1rem 1rem 1rem;
+    overflow-x: auto;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.boton-categoria {
+    padding: 0.6rem 1.5rem;
+    background: white;
+    border: 2px solid #e74c3c;
+    color: #e74c3c;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s;
+    white-space: nowrap;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+}
+
+.boton-categoria:hover {
+    background: #ffeaea;
+    transform: translateY(-2px);
+}
+
+.boton-categoria.activo {
+    background: #e74c3c;
+    color: white;
+    transform: scale(1.05);
+}
+
+/* ==========================================
+   GRID DEL MENÚ
+   ========================================== */
+.menu-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+/* Tarjeta de cada plato */
+.plato-tarjeta {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+    animation: aparecer 0.5s ease-in;
+}
+
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.plato-tarjeta:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+}
+
+/* Imagen del plato */
+.plato-imagen {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+/* Etiqueta de "Más Vendido" */
+.etiqueta-destacado {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #f39c12;
+    color: white;
+    padding: 0.3rem 1rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    box-shadow: 0 2px 10px rgba(243, 156, 18, 0.4);
+}
+
+/* Información del plato */
+.plato-info {
+    padding: 1.5rem;
+}
+
+.plato-categoria {
+    color: #e74c3c;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.3rem;
+}
+
+.plato-nombre {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #2c3e50;
+}
+
+.plato-descripcion {
+    color: #7f8c8d;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+}
+
+/* Precios */
+.plato-precios {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1rem 0;
+    padding: 0.8rem;
+    background: #f8f9fa;
+    border-radius: 10px;
+}
+
+.precio-dolares {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #2c3e50;
+}
+
+.precio-bolivares {
+    font-size: 0.9rem;
+    color: #7f8c8d;
+    font-weight: 600;
+}
+
+/* Botón de agregar */
+.boton-agregar {
+    width: 100%;
+    padding: 0.8rem;
+    background: #27ae60;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: 'Poppins', sans-serif;
+}
+
+.boton-agregar:hover {
+    background: #229954;
+    transform: scale(1.02);
+}
+
+.boton-agregar:active {
+    transform: scale(0.98);
+}
+
+/* Plato agotado */
+.plato-agotado {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.plato-agotado .boton-agregar {
+    background: #bdc3c7;
+    cursor: not-allowed;
+}
+
+.etiqueta-agotado {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    background: rgba(231, 76, 60, 0.9);
+    color: white;
+    padding: 0.5rem 3rem;
+    font-weight: 700;
+    font-size: 1.2rem;
+    white-space: nowrap;
+}
+
+/* ==========================================
+   CARRITO FLOTANTE
+   ========================================== */
+.carrito-flotante {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 65px;
+    height: 65px;
+    background: #e74c3c;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 8px 25px rgba(231, 76, 60, 0.5);
+    z-index: 90;
+    transition: transform 0.3s;
+}
+
+.carrito-flotante:hover {
+    transform: scale(1.1) rotate(10deg);
+}
+
+.icono-carrito {
+    font-size: 2rem;
+}
+
+.contador-carrito {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: #f39c12;
+    color: white;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+    border: 3px solid white;
+}
+
+/* ==========================================
+   PANEL DEL CARRITO
+   ========================================== */
+.panel-carrito {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    border-radius: 30px 30px 0 0;
+    box-shadow: 0 -5px 30px rgba(0,0,0,0.2);
+    z-index: 95;
+    padding: 1.5rem;
+    max-height: 60vh;
+    overflow-y: auto;
+    transform: translateY(100%);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.panel-carrito.abierto {
+    transform: translateY(0);
+}
+
+.carrito-encabezado {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #ecf0f1;
+}
+
+.cerrar-carrito {
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: #e74c3c;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s;
+}
+
+.cerrar-carrito:hover {
+    background: #ffeaea;
+}
+
+/* Item en el carrito */
+.item-carrito {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid #ecf0f1;
+}
+
+.item-carrito-nombre {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.item-carrito-precio {
+    color: #e74c3c;
+    font-weight: 600;
+}
+
+.boton-eliminar {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: background 0.3s;
+}
+
+.boton-eliminar:hover {
+    background: #c0392b;
+}
+
+/* Pie del carrito */
+.carrito-pie {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 2px solid #ecf0f1;
+}
+
+.total-carrito {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+    color: #2c3e50;
+}
+
+.total-bolivares {
+    display: flex;
+    justify-content: space-between;
+    color: #7f8c8d;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.boton-whatsapp {
+    width: 100%;
+    padding: 1rem;
+    background: #25D366;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    transition: background 0.3s;
+    margin-top: 0.5rem;
+}
+
+.boton-whatsapp:hover {
+    background: #128C7E;
+}
+
+/* ==========================================
+   MODAL
+   ========================================== */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(5px);
+}
+
+.modal.abierto {
+    display: flex;
+}
+
+.modal-contenido {
+    background: white;
+    padding: 2rem;
+    border-radius: 20px;
+    max-width: 500px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.grupo-formulario {
+    margin-bottom: 1rem;
+}
+
+.grupo-formulario label {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.grupo-formulario input,
+.grupo-formulario textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    transition: border-color 0.3s;
+}
+
+.grupo-formulario input:focus,
+.grupo-formulario textarea:focus {
+    border-color: #e74c3c;
+    outline: none;
+}
+
+.resumen-pedido {
+    background: #f8f9fa;
+    padding: 1rem;
+    border-radius: 10px;
+    margin: 1rem 0;
+}
+
+.botones-modal {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.boton-cancelar {
+    flex: 1;
+    padding: 0.8rem;
+    background: #bdc3c7;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    transition: background 0.3s;
+}
+
+.boton-cancelar:hover {
+    background: #95a5a6;
+}
+
+/* ==========================================
+   PIE DE PÁGINA
+   ========================================== */
+.pie-pagina {
+    text-align: center;
+    padding: 2rem;
+    color: #7f8c8d;
+    font-size: 0.9rem;
+    margin-top: 2rem;
+}
+
+/* Mensaje de carga */
+.cargando {
+    text-align: center;
+    color: #7f8c8d;
+    font-size: 1.2rem;
+    padding: 3rem;
+    grid-column: 1 / -1;
+}
+
+/* ==========================================
+   RESPONSIVE (Para celulares)
+   ========================================== */
+@media (max-width: 600px) {
+    .menu-grid {
+        grid-template-columns: 1fr;
+        padding: 0 0.5rem;
+    }
+    
+    .encabezado h1 {
+        font-size: 1.5rem;
+    }
+    
+    .encabezado {
+        padding: 1.5rem 0.5rem;
+    }
+    
+    .plato-precios {
+        flex-direction: column;
+        gap: 0.3rem;
+    }
+}
