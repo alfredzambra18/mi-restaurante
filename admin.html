@@ -4,535 +4,817 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🔐 Panel Admin - Restaurante</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
         body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: #f0f2f5;
+            padding: 15px;
         }
         
-        .contenedor-admin {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 1rem;
-        }
-        
-        .login-contenedor {
-            max-width: 450px;
-            margin: 100px auto;
+        .login-box {
+            max-width: 400px;
+            margin: 80px auto;
             background: white;
-            padding: 3rem 2rem;
+            padding: 40px 30px;
             border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             text-align: center;
         }
         
-        .login-icono {
+        .login-box .icono {
             font-size: 4rem;
-            margin-bottom: 1rem;
+            margin-bottom: 10px;
         }
         
-        .login-titulo {
+        .login-box h2 {
             color: #2c3e50;
-            margin-bottom: 0.5rem;
-            font-size: 1.8rem;
+            margin-bottom: 5px;
         }
         
-        .login-subtitulo {
+        .login-box p {
             color: #7f8c8d;
-            margin-bottom: 2rem;
-            font-size: 0.95rem;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
         }
         
-        .input-contraseña {
+        .login-box input {
             width: 100%;
-            padding: 1rem 1.5rem;
+            padding: 14px;
             border: 2px solid #e0e0e0;
             border-radius: 50px;
             font-size: 1.1rem;
-            font-family: 'Poppins', sans-serif;
             text-align: center;
-            letter-spacing: 5px;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+            outline: none;
             transition: border-color 0.3s;
         }
         
-        .input-contraseña:focus {
+        .login-box input:focus {
             border-color: #e74c3c;
-            outline: none;
         }
         
-        .boton-login {
+        .btn-login {
             width: 100%;
-            padding: 1rem;
+            padding: 14px;
             background: #e74c3c;
             color: white;
             border: none;
             border-radius: 50px;
             font-size: 1.1rem;
-            font-weight: 600;
+            font-weight: bold;
             cursor: pointer;
-            margin-top: 1.5rem;
-            font-family: 'Poppins', sans-serif;
-            transition: background 0.3s, transform 0.3s;
-        }
-        
-        .boton-login:hover {
-            background: #c0392b;
-            transform: translateY(-2px);
-        }
-        
-        .error-login {
-            color: #e74c3c;
-            margin-top: 1rem;
-            display: none;
-            font-size: 0.9rem;
-        }
-        
-        .pista-contraseña {
-            color: #95a5a6;
-            font-size: 0.8rem;
-            margin-top: 1.5rem;
-        }
-        
-        .panel-principal {
-            display: none;
-        }
-        
-        .admin-encabezado {
-            background: linear-gradient(135deg, #2c3e50, #34495e);
-            color: white;
-            padding: 1.5rem 2rem;
-            border-radius: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-        }
-        
-        .admin-titulo {
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-        
-        .admin-subtitulo {
-            font-size: 0.9rem;
-            opacity: 0.8;
-        }
-        
-        .boton-cerrar-sesion {
-            background: #e74c3c;
-            color: white;
-            border: none;
-            padding: 0.7rem 1.5rem;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: 600;
-            font-family: 'Poppins', sans-serif;
             transition: background 0.3s;
         }
         
-        .boton-cerrar-sesion:hover {
+        .btn-login:hover {
             background: #c0392b;
         }
         
-        .seccion-admin {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 20px;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        .error-msg {
+            color: #e74c3c;
+            margin-top: 10px;
+            display: none;
+            font-weight: bold;
         }
         
-        .seccion-titulo {
+        .pista {
+            color: #95a5a6;
+            font-size: 0.8rem;
+            margin-top: 15px;
+        }
+        
+        .panel {
+            display: none;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .panel-header {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            padding: 20px 25px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .panel-header h2 {
+            font-size: 1.5rem;
+        }
+        
+        .btn-logout {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        
+        .section {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        
+        .section h3 {
             color: #2c3e50;
-            font-size: 1.3rem;
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.5rem;
             border-bottom: 3px solid #e74c3c;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
             display: inline-block;
         }
         
-        .mensaje-exito {
-            background: #d4edda;
-            color: #155724;
-            padding: 1rem 1.5rem;
-            border-radius: 10px;
-            margin-bottom: 1rem;
-            display: none;
-            animation: desvanecer 3s forwards;
-            font-weight: 500;
-        }
-        
-        @keyframes desvanecer {
-            0% { opacity: 1; }
-            70% { opacity: 1; }
-            100% { opacity: 0; display: none; }
-        }
-        
-        .fila-formulario {
+        .form-row {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-bottom: 1rem;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
         }
         
-        .grupo-campo {
+        @media (max-width: 600px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .form-group {
             display: flex;
             flex-direction: column;
         }
         
-        .grupo-campo label {
+        .form-group label {
             font-weight: 600;
-            margin-bottom: 0.3rem;
-            color: #2c3e50;
+            margin-bottom: 5px;
+            color: #555;
             font-size: 0.9rem;
         }
         
-        .grupo-campo input,
-        .grupo-campo select,
-        .grupo-campo textarea {
-            padding: 0.7rem 1rem;
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 10px 12px;
             border: 2px solid #e0e0e0;
             border-radius: 10px;
-            font-size: 0.95rem;
-            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-family: inherit;
             transition: border-color 0.3s;
         }
         
-        .grupo-campo input:focus,
-        .grupo-campo select:focus,
-        .grupo-campo textarea:focus {
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
             border-color: #e74c3c;
             outline: none;
         }
         
-        .grupo-campo textarea {
-            resize: vertical;
-            min-height: 60px;
-        }
-        
-        .checkbox-contenedor {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin: 0.5rem 0;
-        }
-        
-        .checkbox-contenedor input[type="checkbox"] {
-            width: 20px;
-            height: 20px;
-            cursor: pointer;
-        }
-        
-        .checkbox-contenedor label {
-            cursor: pointer;
-            font-weight: 500;
-        }
-        
-        .boton-guardar {
+        .btn-green {
             background: #27ae60;
             color: white;
             border: none;
-            padding: 0.8rem 2rem;
+            padding: 12px 25px;
             border-radius: 25px;
             cursor: pointer;
-            font-weight: 600;
-            font-family: 'Poppins', sans-serif;
+            font-weight: bold;
             font-size: 0.95rem;
             transition: background 0.3s;
         }
         
-        .boton-guardar:hover {
+        .btn-green:hover {
             background: #229954;
         }
         
-        .boton-agregar {
+        .btn-blue {
             background: #2980b9;
             color: white;
             border: none;
-            padding: 0.8rem 2rem;
+            padding: 12px 25px;
             border-radius: 25px;
             cursor: pointer;
-            font-weight: 600;
-            font-family: 'Poppins', sans-serif;
+            font-weight: bold;
             font-size: 0.95rem;
             transition: background 0.3s;
         }
         
-        .boton-agregar:hover {
+        .btn-blue:hover {
             background: #2471a3;
         }
         
-        .boton-eliminar {
+        .btn-red {
             background: #e74c3c;
             color: white;
             border: none;
-            padding: 0.5rem 1rem;
+            padding: 8px 15px;
             border-radius: 15px;
             cursor: pointer;
-            font-weight: 500;
-            font-family: 'Poppins', sans-serif;
+            font-weight: bold;
             font-size: 0.85rem;
             transition: background 0.3s;
         }
         
-        .boton-eliminar:hover {
+        .btn-red:hover {
             background: #c0392b;
         }
         
-        .tabla-platos {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 1rem;
-        }
-        
-        .tabla-platos th {
-            background: #f8f9fa;
-            padding: 1rem;
-            text-align: left;
-            font-weight: 600;
-            color: #2c3e50;
-            font-size: 0.9rem;
-            border-bottom: 2px solid #e0e0e0;
-        }
-        
-        .tabla-platos td {
-            padding: 0.8rem 1rem;
-            border-bottom: 1px solid #ecf0f1;
-            font-size: 0.9rem;
-        }
-        
-        .tabla-platos tr:hover {
-            background: #f8f9fa;
-        }
-        
-        .estado-disponible {
-            color: #27ae60;
-            font-weight: 600;
-        }
-        
-        .estado-agotado {
-            color: #e74c3c;
-            font-weight: 600;
-        }
-        
-        .badge-destacado {
+        .btn-yellow {
             background: #f39c12;
             color: white;
-            padding: 0.2rem 0.6rem;
-            border-radius: 10px;
-            font-size: 0.75rem;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.85rem;
+            transition: background 0.3s;
+            margin-left: 5px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+        
+        table th {
+            background: #f8f9fa;
+            padding: 12px;
+            text-align: left;
+            border-bottom: 2px solid #e0e0e0;
             font-weight: 600;
         }
         
-        @media (max-width: 768px) {
-            .tabla-platos {
-                font-size: 0.8rem;
-            }
-            
-            .tabla-platos th,
-            .tabla-platos td {
-                padding: 0.5rem;
-            }
-            
-            .admin-encabezado {
-                flex-direction: column;
-                text-align: center;
-                gap: 1rem;
-            }
-            
-            .fila-formulario {
-                grid-template-columns: 1fr;
-            }
+        table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #ecf0f1;
+        }
+        
+        table tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .disponible {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        .agotado {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        
+        .success-msg {
+            background: #d4edda;
+            color: #155724;
+            padding: 12px 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            display: none;
+            font-weight: 500;
+            animation: fadeOut 3s forwards;
+        }
+        
+        @keyframes fadeOut {
+            0%, 70% { opacity: 1; }
+            100% { opacity: 0; display: none; }
+        }
+        
+        .foto-preview {
+            width: 100%;
+            max-width: 200px;
+            height: 150px;
+            border: 3px dashed #ddd;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 10px;
+            background: #fafafa;
+            background-size: cover;
+            background-position: center;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .foto-preview .placeholder {
+            color: #bdc3c7;
+            font-size: 3rem;
+        }
+        
+        .btn-foto {
+            background: #8e44ad;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .btn-foto:hover {
+            background: #7d3c98;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            gap: 20px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+        
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        
+        .checkbox-group input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
-    <div class="contenedor-admin">
+    
+    <!-- ==================== LOGIN ==================== -->
+    <div class="login-box" id="loginBox">
+        <div class="icono">👨‍🍳</div>
+        <h2>Panel del Dueño</h2>
+        <p>Ingresa la contraseña para administrar tu restaurante</p>
         
-        <!-- PANTALLA DE LOGIN -->
-        <div class="login-contenedor" id="loginPantalla">
-            <div class="login-icono">👨‍🍳</div>
-            <h1 class="login-titulo">Panel del Dueño</h1>
-            <p class="login-subtitulo">Ingresa la contraseña para administrar tu restaurante</p>
-            
-            <input type="password" 
-                   id="passwordInput" 
-                   class="input-contraseña" 
-                   placeholder="••••••"
-                   maxlength="20">
-            
-            <button class="boton-login" onclick="iniciarSesion()">
-                🔓 Ingresar al Panel
-            </button>
-            
-            <p class="error-login" id="errorLogin">❌ Contraseña incorrecta</p>
-            <p class="pista-contraseña">💡 Contraseña por defecto: <strong>admin123</strong></p>
+        <input type="password" id="passInput" placeholder="••••••" maxlength="20">
+        <button class="btn-login" onclick="login()">🔓 Ingresar al Panel</button>
+        
+        <p class="error-msg" id="errorMsg">❌ Contraseña incorrecta</p>
+        <p class="pista">💡 Contraseña por defecto: <strong>admin123</strong></p>
+    </div>
+    
+    <!-- ==================== PANEL PRINCIPAL ==================== -->
+    <div class="panel" id="panelAdmin">
+        
+        <div class="success-msg" id="successMsg">✅ Cambios guardados exitosamente</div>
+        
+        <!-- Encabezado -->
+        <div class="panel-header">
+            <div>
+                <h2>👨‍🍳 Panel de Administración</h2>
+                <p style="opacity:0.8; margin-top:5px;" id="restName">Cargando...</p>
+            </div>
+            <button class="btn-logout" onclick="logout()">🚪 Cerrar Sesión</button>
         </div>
         
-        <!-- PANEL PRINCIPAL -->
-        <div class="panel-principal" id="panelPrincipal">
-            
-            <div class="mensaje-exito" id="mensajeExito">✅ Cambios guardados exitosamente</div>
-            
-            <div class="admin-encabezado">
-                <div>
-                    <div class="admin-titulo">👨‍🍳 Panel de Administración</div>
-                    <div class="admin-subtitulo" id="nombreRestAdmin">Restaurante</div>
+        <!-- SECCIÓN 1: Datos del Restaurante -->
+        <div class="section">
+            <h3>🏪 Datos del Restaurante</h3>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Nombre del Restaurante:</label>
+                    <input type="text" id="eNombre" placeholder="Ej: Restaurante El Buen Sabor">
                 </div>
-                <button class="boton-cerrar-sesion" onclick="cerrarSesion()">🚪 Cerrar Sesión</button>
-            </div>
-            
-            <!-- SECCIÓN 1: Datos del Restaurante -->
-            <div class="seccion-admin">
-                <h3 class="seccion-titulo">🏪 Datos del Restaurante</h3>
-                <div class="fila-formulario">
-                    <div class="grupo-campo">
-                        <label>Nombre del Restaurante:</label>
-                        <input type="text" id="editNombre" placeholder="Ej: Restaurante El Buen Sabor">
-                    </div>
-                    <div class="grupo-campo">
-                        <label>Emoji/Logo:</label>
-                        <input type="text" id="editLogo" placeholder="Ej: 🍽️" maxlength="5">
-                    </div>
+                <div class="form-group">
+                    <label>Logo (emoji):</label>
+                    <input type="text" id="eLogo" placeholder="Ej: 🍽️" maxlength="5">
                 </div>
-                <div class="fila-formulario">
-                    <div class="grupo-campo">
-                        <label>WhatsApp (con código 58):</label>
-                        <input type="text" id="editWhatsApp" placeholder="584120000000">
-                    </div>
-                    <div class="grupo-campo">
-                        <label>Dirección:</label>
-                        <input type="text" id="editDireccion" placeholder="Av. Principal, Local 5">
-                    </div>
+                <div class="form-group">
+                    <label>WhatsApp (con código 58):</label>
+                    <input type="text" id="eWhatsApp" placeholder="584120000000">
                 </div>
-                <div class="fila-formulario">
-                    <div class="grupo-campo">
-                        <label>Horario:</label>
-                        <input type="text" id="editHorario" placeholder="Lun-Sáb: 11am-9pm">
-                    </div>
-                    <div class="grupo-campo">
-                        <label>Mensaje de bienvenida:</label>
-                        <input type="text" id="editMensaje" placeholder="¡Bienvenidos!">
-                    </div>
+                <div class="form-group">
+                    <label>Dirección:</label>
+                    <input type="text" id="eDireccion" placeholder="Av. Principal, Local 5">
                 </div>
-                <button class="boton-guardar" onclick="guardarDatosRestaurante()">💾 Guardar Datos</button>
-            </div>
-            
-            <!-- SECCIÓN 2: Tasa del Dólar -->
-            <div class="seccion-admin">
-                <h3 class="seccion-titulo">💵 Tasa del Dólar BCV</h3>
-                <div class="fila-formulario">
-                    <div class="grupo-campo">
-                        <label>Tasa actual (Bolívares por Dólar):</label>
-                        <input type="number" id="editTasa" step="0.01" placeholder="35.50">
-                    </div>
-                    <div class="grupo-campo" style="justify-content: flex-end;">
-                        <button class="boton-guardar" onclick="actualizarTasa()">💱 Actualizar Tasa</button>
-                    </div>
+                <div class="form-group">
+                    <label>Horario:</label>
+                    <input type="text" id="eHorario" placeholder="Lun-Sáb: 11am-9pm">
                 </div>
-                <p style="color: #7f8c8d; font-size: 0.85rem; margin-top: 0.5rem;">
-                    📌 Esta tasa se usará para calcular los precios en bolívares en todo el menú
-                </p>
-            </div>
-            
-            <!-- SECCIÓN 3: Cambiar Contraseña (NUEVA) -->
-            <div class="seccion-admin">
-                <h3 class="seccion-titulo">🔐 Cambiar Contraseña</h3>
-                <div class="fila-formulario">
-                    <div class="grupo-campo">
-                        <label>Contraseña actual:</label>
-                        <input type="password" id="passwordActual" placeholder="••••••">
-                    </div>
-                    <div class="grupo-campo">
-                        <label>Nueva contraseña:</label>
-                        <input type="password" id="passwordNueva" placeholder="Mínimo 6 caracteres">
-                    </div>
-                    <div class="grupo-campo">
-                        <label>Confirmar nueva contraseña:</label>
-                        <input type="password" id="passwordConfirmar" placeholder="Repite la nueva contraseña">
-                    </div>
-                    <div class="grupo-campo" style="justify-content: flex-end;">
-                        <button class="boton-guardar" onclick="cambiarPassword()">🔒 Cambiar Contraseña</button>
-                    </div>
-                </div>
-                <p style="color: #7f8c8d; font-size: 0.85rem; margin-top: 0.5rem;">
-                    📌 Guarda bien tu nueva contraseña. Si la olvidas, tendrás que editar el archivo data.json
-                </p>
-            </div>
-            
-            <!-- SECCIÓN 4: Agregar Nuevo Plato -->
-            <div class="seccion-admin">
-                <h3 class="seccion-titulo">➕ Agregar Nuevo Plato</h3>
-                <div class="fila-formulario">
-                    <div class="grupo-campo">
-                        <label>Nombre del Plato:</label>
-                        <input type="text" id="nuevoNombre" placeholder="Ej: Parrilla Mixta">
-                    </div>
-                    <div class="grupo-campo">
-                        <label>Categoría:</label>
-                        <select id="nuevoCategoria">
-                            <option value="">Seleccionar categoría...</option>
-                        </select>
-                    </div>
-                    <div class="grupo-campo">
-                        <label>Precio en Dólares ($):</label>
-                        <input type="number" id="nuevoPrecio" step="0.01" placeholder="15.99">
-                    </div>
-                </div>
-                <div class="fila-formulario">
-                    <div class="grupo-campo">
-                        <label>Descripción:</label>
-                        <textarea id="nuevoDescripcion" placeholder="Describe los ingredientes..."></textarea>
-                    </div>
-                    <div class="grupo-campo">
-                        <label>URL de la Foto:</label>
-                        <input type="text" id="nuevoFoto" placeholder="https://imagen.com/foto.jpg">
-                        <small style="color: #7f8c8d; margin-top: 0.2rem;">
-                            💡 Puedes subir fotos a <a href="https://imgur.com" target="_blank">imgur.com</a> (gratis)
-                        </small>
-                    </div>
-                </div>
-                <div class="checkbox-contenedor">
-                    <input type="checkbox" id="nuevoDisponible" checked>
-                    <label>✅ Disponible para venta</label>
-                </div>
-                <div class="checkbox-contenedor">
-                    <input type="checkbox" id="nuevoDestacado">
-                    <label>⭐ Marcar como "Más Vendido"</label>
-                </div>
-                <button class="boton-agregar" onclick="agregarNuevoPlato()">➕ Agregar Plato al Menú</button>
-            </div>
-            
-            <!-- SECCIÓN 5: Lista de Platos Actuales -->
-            <div class="seccion-admin">
-                <h3 class="seccion-titulo">📋 Platos en el Menú</h3>
-                <div style="overflow-x: auto;">
-                    <table class="tabla-platos" id="tablaPlatos">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Nombre</th>
-                                <th>Categoría</th>
-                                <th>Precio $</th>
-                                <th>Estado</th>
-                                <th>Destacado</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody id="cuerpoTabla">
-                            <tr>
-                                <td colspan="7" style="text-align: center;">Cargando platos...</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="form-group">
+                    <label>Mensaje de Bienvenida:</label>
+                    <input type="text" id="eMensaje" placeholder="¡Bienvenidos!">
                 </div>
             </div>
-            
+            <button class="btn-green" onclick="guardarDatosRest()">💾 Guardar Datos</button>
         </div>
+        
+        <!-- SECCIÓN 2: Tasa BCV -->
+        <div class="section">
+            <h3>💵 Tasa del Dólar BCV</h3>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Tasa actual (Bolívares por Dólar):</label>
+                    <input type="number" id="eTasa" step="0.01" placeholder="35.50">
+                </div>
+                <div class="form-group" style="justify-content: flex-end;">
+                    <button class="btn-green" onclick="actualizarTasa()">💱 Actualizar Tasa</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- SECCIÓN 3: Cambiar Contraseña -->
+        <div class="section">
+            <h3>🔐 Cambiar Contraseña</h3>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Contraseña actual:</label>
+                    <input type="password" id="passActual" placeholder="••••••">
+                </div>
+                <div class="form-group">
+                    <label>Nueva contraseña:</label>
+                    <input type="password" id="passNueva" placeholder="Mínimo 6 caracteres">
+                </div>
+                <div class="form-group">
+                    <label>Confirmar nueva contraseña:</label>
+                    <input type="password" id="passConfirmar" placeholder="Repite la contraseña">
+                </div>
+            </div>
+            <button class="btn-blue" onclick="cambiarPassword()">🔒 Cambiar Contraseña</button>
+        </div>
+        
+        <!-- SECCIÓN 4: Agregar Plato con FOTO LOCAL -->
+        <div class="section">
+            <h3>➕ Agregar Nuevo Plato</h3>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Nombre del Plato:</label>
+                    <input type="text" id="nNombre" placeholder="Ej: Parrilla Mixta">
+                </div>
+                <div class="form-group">
+                    <label>Categoría:</label>
+                    <select id="nCategoria">
+                        <option value="">Seleccionar categoría...</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Precio en Dólares ($):</label>
+                    <input type="number" id="nPrecio" step="0.01" placeholder="15.99">
+                </div>
+            </div>
+            
+            <!-- SUBIR FOTO DESDE EL CELULAR -->
+            <div class="form-group" style="margin-bottom: 15px;">
+                <label>📸 Foto del Plato (desde tu galería):</label>
+                <input type="file" 
+                       id="nFotoFile" 
+                       accept="image/*" 
+                       capture="environment"
+                       style="display: none;"
+                       onchange="previewFoto(this)">
+                <div class="foto-preview" id="fotoPreview" onclick="document.getElementById('nFotoFile').click()">
+                    <span class="placeholder">📷</span>
+                </div>
+                <button type="button" class="btn-foto" onclick="document.getElementById('nFotoFile').click()">
+                    📁 Seleccionar Foto
+                </button>
+                <small style="display: block; color: #7f8c8d; margin-top: 8px;">
+                    💡 Toca para elegir una foto de tu galería o tomar una nueva
+                </small>
+            </div>
+            
+            <div class="form-group" style="margin-bottom: 15px;">
+                <label>Descripción:</label>
+                <textarea id="nDescripcion" rows="2" placeholder="Describe los ingredientes del plato..."></textarea>
+            </div>
+            
+            <div class="checkbox-group">
+                <label>
+                    <input type="checkbox" id="nDisponible" checked>
+                    ✅ Disponible para venta
+                </label>
+                <label>
+                    <input type="checkbox" id="nDestacado">
+                    ⭐ Marcar como "Más Vendido"
+                </label>
+            </div>
+            
+            <button class="btn-blue" onclick="agregarPlato()">➕ Agregar Plato al Menú</button>
+        </div>
+        
+        <!-- SECCIÓN 5: Lista de Platos -->
+        <div class="section">
+            <h3>📋 Platos en el Menú</h3>
+            <div style="overflow-x: auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Foto</th>
+                            <th>Nombre</th>
+                            <th>Precio $</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaPlatos">
+                        <tr><td colspan="6" style="text-align:center;">Cargando platos...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
     </div>
 
-    <script src="admin.js"></script>
+    <script>
+        // ============ VARIABLES GLOBALES ============
+        let datos = null;
+        let fotoBase64 = '';  // Aquí guardamos la foto en base64
+        
+        // ============ LOGIN ============
+        async function login() {
+            const pass = document.getElementById('passInput').value;
+            
+            try {
+                const r = await fetch('data.json');
+                datos = await r.json();
+                const passCorrecta = datos.password || 'admin123';
+                
+                if (pass === passCorrecta) {
+                    document.getElementById('loginBox').style.display = 'none';
+                    document.getElementById('panelAdmin').style.display = 'block';
+                    document.getElementById('errorMsg').style.display = 'none';
+                    cargarPanel();
+                } else {
+                    document.getElementById('errorMsg').style.display = 'block';
+                    document.getElementById('passInput').value = '';
+                }
+            } catch(e) {
+                alert('❌ Error al cargar data.json. Verifica que el archivo exista.');
+                console.error(e);
+            }
+        }
+        
+        function logout() {
+            if (confirm('¿Cerrar sesión?')) {
+                document.getElementById('loginBox').style.display = 'block';
+                document.getElementById('panelAdmin').style.display = 'none';
+                document.getElementById('passInput').value = '';
+                fotoBase64 = '';
+                resetPreview();
+            }
+        }
+        
+        // ============ CARGAR DATOS EN PANEL ============
+        function cargarPanel() {
+            const info = datos.informacion_restaurante;
+            
+            document.getElementById('restName').textContent = 'Administrando: ' + info.nombre;
+            document.getElementById('eNombre').value = info.nombre;
+            document.getElementById('eLogo').value = info.logo_emoji;
+            document.getElementById('eWhatsApp').value = info.whatsapp;
+            document.getElementById('eDireccion').value = info.direccion;
+            document.getElementById('eHorario').value = info.horario;
+            document.getElementById('eMensaje').value = info.mensaje_bienvenida || '';
+            document.getElementById('eTasa').value = datos.tasa_dolar_bcv;
+            
+            // Categorías
+            const selCat = document.getElementById('nCategoria');
+            selCat.innerHTML = '<option value="">Seleccionar categoría...</option>';
+            datos.categorias.forEach(c => {
+                selCat.innerHTML += `<option value="${c}">${c}</option>`;
+            });
+            
+            mostrarTabla();
+        }
+        
+        // ============ PREVIEW DE FOTO ============
+        function previewFoto(input) {
+            const preview = document.getElementById('fotoPreview');
+            
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    fotoBase64 = e.target.result;
+                    preview.style.backgroundImage = `url(${fotoBase64})`;
+                    preview.style.border = '3px solid #27ae60';
+                    preview.querySelector('.placeholder').style.display = 'none';
+                };
+                
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        
+        function resetPreview() {
+            const preview = document.getElementById('fotoPreview');
+            fotoBase64 = '';
+            preview.style.backgroundImage = '';
+            preview.style.border = '3px dashed #ddd';
+            preview.querySelector('.placeholder').style.display = 'block';
+            document.getElementById('nFotoFile').value = '';
+        }
+        
+        // ============ GUARDAR DATOS ============
+        function descargarJSON() {
+            const json = JSON.stringify(datos, null, 2);
+            const blob = new Blob([json], {type: 'application/json'});
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'data.json';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            
+            // También guardar en localStorage
+            localStorage.setItem('restaurante_data', json);
+        }
+        
+        function mostrarExito() {
+            const msg = document.getElementById('successMsg');
+            msg.style.display = 'block';
+            msg.style.animation = 'none';
+            msg.offsetHeight;
+            msg.style.animation = 'fadeOut 3s forwards';
+        }
+        
+        function guardarDatosRest() {
+            datos.informacion_restaurante.nombre = document.getElementById('eNombre').value;
+            datos.informacion_restaurante.logo_emoji = document.getElementById('eLogo').value;
+            datos.informacion_restaurante.whatsapp = document.getElementById('eWhatsApp').value;
+            datos.informacion_restaurante.direccion = document.getElementById('eDireccion').value;
+            datos.informacion_restaurante.horario = document.getElementById('eHorario').value;
+            datos.informacion_restaurante.mensaje_bienvenida = document.getElementById('eMensaje').value;
+            
+            descargarJSON();
+            mostrarExito();
+            alert('✅ Datos guardados.\n\n📁 Se descargó data.json\n🔄 Reemplaza el archivo viejo en GitHub.');
+        }
+        
+        function actualizarTasa() {
+            const tasa = parseFloat(document.getElementById('eTasa').value);
+            if (isNaN(tasa) || tasa <= 0) {
+                alert('⚠️ Ingresa una tasa válida');
+                return;
+            }
+            datos.tasa_dolar_bcv = tasa;
+            descargarJSON();
+            mostrarExito();
+            alert('💵 Tasa actualizada a: ' + tasa + ' Bs/USD');
+        }
+        
+        function cambiarPassword() {
+            const actual = document.getElementById('passActual').value;
+            const nueva = document.getElementById('passNueva').value;
+            const confirmar = document.getElementById('passConfirmar').value;
+            const passGuardada = datos.password || 'admin123';
+            
+            if (actual !== passGuardada) {
+                alert('❌ Contraseña actual incorrecta');
+                return;
+            }
+            if (nueva.length < 6) {
+                alert('⚠️ Mínimo 6 caracteres');
+                return;
+            }
+            if (nueva !== confirmar) {
+                alert('⚠️ Las contraseñas no coinciden');
+                return;
+            }
+            if (nueva === actual) {
+                alert('⚠️ La nueva debe ser diferente');
+                return;
+            }
+            
+            datos.password = nueva;
+            descargarJSON();
+            mostrarExito();
+            document.getElementById('passActual').value = '';
+            document.getElementById('passNueva').value = '';
+            document.getElementById('passConfirmar').value = '';
+            alert('✅ Contraseña cambiada a: ' + nueva + '\n\n⚠️ ¡No la olvides!');
+        }
+        
+        // ============ AGREGAR PLATO CON FOTO ============
+        function agregarPlato() {
+            const nombre = document.getElementById('nNombre').value.trim();
+            const categoria = document.getElementById('nCategoria').value;
+            const precio = parseFloat(document.getElementById('nPrecio').value);
+            const descripcion = document.getElementById('nDescripcion').value.trim();
+            const disponible = document.getElementById('nDisponible').checked;
+            const destacado = document.getElementById('nDestacado').checked;
+            
+            // Validaciones
+            if (!nombre) { alert('⚠️ Falta el nombre'); return; }
+            if (!categoria) { alert('⚠️ Selecciona categoría'); return; }
+            if (isNaN(precio) || precio <= 0) { alert('⚠️ Precio inválido'); return; }
+            if (!descripcion) { alert('⚠️ Falta descripción'); return; }
+            
+            // Usar foto local o placeholder
+            const fotoFinal = fotoBase64 || 'https://via.placeholder.com/400x200?text=🍽️+Sin+Foto';
+            
+            // Número nuevo
+            const maxNum = datos.menu.length > 0 
+                ? Math.max(...datos.menu.map(p => p.numero)) 
+                : 0;
+            
+            // Crear plato
+            const nuevoPlato = {
+                numero: maxNum + 1,
+                nombre: nombre,
+                categoria: categoria,
+                descripcion: descripcion,
+                precio_dolares: precio,
+                foto: fotoFinal,
+                disponible: disponible,
+                mas_vendido: destacado
+            };
+            
+            datos.menu.push(nuevoPlato);
+            descargarJSON();
+            mostrarTabla();
+            mostrarExito();
+            
+            // Limpiar formulario
+            document.getElementById('nNombre').value = '';
+            document.getElementById('nPrecio').value = '';
+            document.getElementById('nDescripcion').value = '';
+            document.getElementById('nDisponible').checked = true;
+            document.getElementById('nDestacado').checked = false;
+            resetPreview();
+            
+            alert('✅ Plato agregado: ' + nombre + '\n\n📁 Se descargó data.json actualizado.');
+        }
+        
+        // ============ TABLA DE PLATOS ============
+        function mostrarTabla() {
+            const tbody = document.getElementById('tablaPlatos');
+            
+            if (datos.menu.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; padding:20px;">📋 No hay platos</td></tr>';
+                return;
+            }
+            
+            tbody.innerHTML = datos.menu.map(p => `
+                <tr>
+                    <td><strong>#${p.numero}</strong></td>
+                    <td>
+                        <img src="${p.foto}" 
+                             style="width:50px; height:50px; object-fit:cover; border-radius:8px;"
+                             onerror="this.src='https://via.placeholder.com/50?text=🍽️'">
+                    </td>
+                    <td>${p.nombre}</td>
+                    <td><strong>$${p.precio_dolares.toFixed(2)}</strong></td>
+                    <td class="${p.disponible ? 'disponible' : 'agotado'}">
+                        ${p.disponible ? '✅ Disponible' : '❌ Agotado'}
+                    </td>
+                    <td>
+                        <button class="btn-red" onclick="togglePlato(${p.numero})">
+                            ${p.disponible ? 'Agotar' : 'Activar'}
+                        </button>
+                        <button class="btn-yellow" onclick="eliminarPlato(${p.numero})">
+                            🗑️
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+        
+        function togglePlato(num) {
+            const plato = datos.menu.find(p => p.numero === num);
+            if (plato) {
+                plato.disponible = !plato.disponible;
+                descargarJSON();
+                mostrarTabla();
+                mostrarExito();
+            }
+        }
+        
+        function eliminarPlato(num) {
+            const plato = datos.menu.find(p => p.numero === num);
+            if (plato && confirm('¿Eliminar "' + plato.nombre + '" permanentemente?')) {
+                datos.menu = datos.menu.filter(p => p.numero !== num);
+                descargarJSON();
+                mostrarTabla();
+                mostrarExito();
+            }
+        }
+        
+        // ============ ENTER PARA LOGIN ============
+        document.getElementById('passInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') login();
+        });
+        
+        console.log('👨‍🍳 Panel Admin listo - Puedes subir fotos desde tu celular');
+        console.log('📸 Las fotos se guardan en base64 dentro de data.json');
+    </script>
 </body>
 </html>
