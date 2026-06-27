@@ -4,11 +4,11 @@
     "nombre": "AREPAS JJ",
     "logo_emoji": "🍽️",
     "whatsapp": "584120000000",
-    "direccion": "Av. Principal, Centro Comercial Las Flores, Local 5",
+    "direccion": "Av. 6",
     "horario": "Lunes a Sábado: 11:00 AM - 9:00 PM",
     "mensaje_bienvenida": "¡Bienvenidos! Escanea el QR para ver nuestro menú"
   },
-  "tasa_dolar_bcv": 35.50,
+  "tasa_dolar_bcv": 650.00,
   "categorias": [
     "Entradas",
     "Platos Principales",
