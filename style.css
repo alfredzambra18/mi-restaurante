@@ -1,4 +1,15 @@
 /* ==========================================
+   PALETA DE COLORES (variables)
+   ========================================== */
+:root{
+    --color-primary: #FFC107;   /* amarillo del logo */
+    --color-accent:  #FF6F00;   /* naranja / realce */
+    --color-dark:    #B22222;   /* rojo oscuro / borde */
+    --color-cream:   #FFF8E1;   /* fondo suave cálido */
+    --text-on-light: #2C2C2C;   /* texto sobre amarillos claros */
+}
+
+/* ==========================================
    ESTILOS GENERALES
    ========================================== */
 
@@ -12,20 +23,21 @@
 /* Fondo de la página con gradiente */
 body {
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    background: linear-gradient(135deg, var(--color-cream) 0%, #FFE0B2 100%);
     min-height: 100vh;
     padding-bottom: 100px;
+    color: var(--text-on-light);
 }
 
 /* ==========================================
    ENCABEZADO
    ========================================== */
 .encabezado {
-    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+    background: linear-gradient(135deg, var(--color-dark) 0%, var(--color-accent) 100%);
     color: white;
     padding: 2rem 1rem;
     text-align: center;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.18);
     position: sticky;
     top: 0;
     z-index: 100;
@@ -35,6 +47,8 @@ body {
     font-size: 4rem;
     margin-bottom: 0.5rem;
     animation: rebote 2s infinite;
+    color: var(--color-primary);
+    text-shadow: 1px 1px 0 rgba(0,0,0,0.15);
 }
 
 /* Animación del logo */
@@ -51,14 +65,15 @@ body {
 }
 
 .tasa-dolar {
-    background: rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.18);
     padding: 0.5rem 1.5rem;
     border-radius: 20px;
     display: inline-block;
     margin-top: 0.8rem;
-    font-weight: 600;
+    font-weight: 700;
     backdrop-filter: blur(5px);
     font-size: 0.9rem;
+    color: white;
 }
 
 /* ==========================================
@@ -83,7 +98,7 @@ body {
 }
 
 .buscador:focus {
-    box-shadow: 0 8px 25px rgba(231, 76, 60, 0.3);
+    box-shadow: 0 8px 25px rgba(255,111,0,0.18);
 }
 
 /* ==========================================
@@ -103,8 +118,8 @@ body {
 .boton-categoria {
     padding: 0.6rem 1.5rem;
     background: white;
-    border: 2px solid #e74c3c;
-    color: #e74c3c;
+    border: 2px solid var(--color-dark);
+    color: var(--color-dark);
     border-radius: 25px;
     cursor: pointer;
     font-weight: 600;
@@ -115,14 +130,15 @@ body {
 }
 
 .boton-categoria:hover {
-    background: #ffeaea;
+    background: #fff7e6;
     transform: translateY(-2px);
 }
 
 .boton-categoria.activo {
-    background: #e74c3c;
-    color: white;
+    background: var(--color-primary);
+    color: var(--text-on-light);
     transform: scale(1.05);
+    border-color: var(--color-accent);
 }
 
 /* ==========================================
@@ -139,7 +155,7 @@ body {
 
 /* Tarjeta de cada plato */
 .plato-tarjeta {
-    background: white;
+    background: #fffdfa;
     border-radius: 20px;
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
@@ -176,8 +192,8 @@ body {
     position: absolute;
     top: 15px;
     right: 15px;
-    background: #f39c12;
-    color: white;
+    background: var(--color-primary);
+    color: var(--text-on-light);
     padding: 0.3rem 1rem;
     border-radius: 15px;
     font-size: 0.8rem;
@@ -191,7 +207,7 @@ body {
 }
 
 .plato-categoria {
-    color: #e74c3c;
+    color: var(--color-dark);
     font-size: 0.8rem;
     font-weight: 600;
     text-transform: uppercase;
@@ -226,8 +242,8 @@ body {
 
 .precio-dolares {
     font-size: 1.5rem;
-    font-weight: 700;
-    color: #2c3e50;
+    font-weight: 800;
+    color: var(--color-dark);
 }
 
 .precio-bolivares {
@@ -240,7 +256,7 @@ body {
 .boton-agregar {
     width: 100%;
     padding: 0.8rem;
-    background: #27ae60;
+    background: var(--color-accent);
     color: white;
     border: none;
     border-radius: 10px;
@@ -252,7 +268,7 @@ body {
 }
 
 .boton-agregar:hover {
-    background: #229954;
+    background: #ff8b3d;
     transform: scale(1.02);
 }
 
@@ -293,13 +309,13 @@ body {
     right: 30px;
     width: 65px;
     height: 65px;
-    background: #e74c3c;
+    background: var(--color-dark);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    box-shadow: 0 8px 25px rgba(231, 76, 60, 0.5);
+    box-shadow: 0 8px 25px rgba(178,34,34,0.35);
     z-index: 90;
     transition: transform 0.3s;
 }
@@ -316,7 +332,7 @@ body {
     position: absolute;
     top: -8px;
     right: -8px;
-    background: #f39c12;
+    background: var(--color-primary);
     color: white;
     width: 28px;
     height: 28px;
@@ -366,7 +382,7 @@ body {
     border: none;
     font-size: 1.8rem;
     cursor: pointer;
-    color: #e74c3c;
+    color: var(--color-dark);
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -395,12 +411,12 @@ body {
 }
 
 .item-carrito-precio {
-    color: #e74c3c;
+    color: var(--color-dark);
     font-weight: 600;
 }
 
 .boton-eliminar {
-    background: #e74c3c;
+    background: var(--color-dark);
     color: white;
     border: none;
     width: 30px;
@@ -412,7 +428,7 @@ body {
 }
 
 .boton-eliminar:hover {
-    background: #c0392b;
+    background: #8b1a1a;
 }
 
 /* Pie del carrito */
@@ -525,7 +541,7 @@ body {
 
 .grupo-formulario input:focus,
 .grupo-formulario textarea:focus {
-    border-color: #e74c3c;
+    border-color: var(--color-accent);
     outline: none;
 }
 
@@ -565,7 +581,7 @@ body {
 .pie-pagina {
     text-align: center;
     padding: 2rem;
-    color: #7f8c8d;
+    color: #6b6b6b;
     font-size: 0.9rem;
     margin-top: 2rem;
 }
